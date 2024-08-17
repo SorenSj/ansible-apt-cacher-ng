@@ -4,16 +4,16 @@
   ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Include install
-  ansible.builtin.include_task: install.yml
+  ansible.builtin.include_tasks: install.yml
   tags: install
   when: apt_cacher_ng_server is not defined
 
 - name: Include configurations
-  ansible.builtin.include_task: configure.yml
+  ansible.builtin.include_tasks: configure.yml
   tags: configure
   when: apt_cacher_ng_server is not defined
 
 - name: Include client tasks
-  ansible.builtin.include_task: client.yml
+  ansible.builtin.include_tasks: client.yml
   tags: client
   when: apt_cacher_ng_server is defined
