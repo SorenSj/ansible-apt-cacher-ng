@@ -6,7 +6,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart apt-cacher-ng
+  notify: Restart apt-cacher-ng
 
 - name: Security configuration
   template:
@@ -15,4 +15,4 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart apt-cacher-ng
+  notify: Restart apt-cacher-ng
