@@ -1,22 +1,71 @@
 # {{ ansible_managed }}
 
-BindAddress: {{ apt_cacher_ng_bind_address }}
+{% if apt_catcher_ng_cachedir is defined %}
 CacheDir: {{ apt_cacher_ng_cache_dir }}
-ExTreshold: {{ apt_cacher_ng_ex_treshold }}
-LocalDirs: {{ apt_cacher_ng_local_dirs }}
-LogDir: {{ apt_cacher_ng_log_dir }}
+{% endif %}
+{% if apt_cacher_ng_cache_dir is not defined %}
+CacheDir: /var/cache/apt-cacher-ng
+{% endif %}
+{% if apt_cacher_ng_pid_file is defined %}
 PidFile: {{ apt_cacher_ng_pid_file }}
+{% endif %}
+{% if apt_cacher_ng_pid_file is not defined %}
+PidFile: /var/run/apt-cacher-ng/pid
+{% endif %}
+{% if apt_cacher_ng_log_dir is defined %}
+LogDir: {{ apt_cacher_ng_log_dir }}
+{% endif %}
+{% if apt_cacher_ng_log_dir is not defined %}
+LogDir: /var/log/apt-cacher-ng
+{% endif %}
+{% if apt_cacher_ng_port is defined %} 
 Port: {{ apt_cacher_ng_port }}
-Remap-debrep: {{ apt_cacher_ng_remap_debrep }} # Debian Archives
-Remap-uburep: {{ apt_cacher_ng_remap_uburep }} # Ubuntu Archives
-Remap-alxrep: {{ apt_cacher_ng_remap_alxrep }} # Arch Linux
-Remap-fedora: {{ apt_cacher_ng_remap_fedora }} # Fedora Linux
-Remap-epel:   {{ apt_cacher_ng_remap_epel }} # Fedora EPEL
-Remap-slrep:  {{ apt_cacher_ng_remap_slrep }} # Scientific Linux
-Remap-gentoo: {{ apt_cacher_ng_remap_gentoo }} # Gentoo Archives
+{% endif %}
+{% if apt_cacher_ng_port is not defined %}
+Port: 3142
+{% endif %}
+{% if apt_cacher_ng_bind_address is defined %}
+BindAddress: {{ apt_cacher_ng_bind_address }}
+{% endif %}
+{% if apt_cacher_ng_bind_address is not defined %}
+BindAddress: 0.0.0.0
+{% endif %}
+{% if apt_cacher_ng_ex_treshold is defined %}
+ExTreshold: {{ apt_cacher_ng_ex_treshold }}
+{% endif %}
+{% if apt_cacher_ng_local_dirs is defined %}
+LocalDirs: {{ apt_cacher_ng_local_dirs }}
+{% endif %}
+{% if apt_cacher_ng_report_page is defined %}
 ReportPage: {{ apt_cacher_ng_report_page }}
+{% endif %}
+{% if apt_cacher_ng_support_dir is defined %}
 SupportDir: {{ apt_cacher_ng_support_dir }}
+{% endif %}
+{% if apt_cacher_ng_verbose_log is defined %}
 VerboseLog: {{ apt_cacher_ng_verbose_log }}
+{% endif %}
 {% if apt_cacher_ng_proxy is defined %}
 Proxy: {{ apt_cacher_ng_proxy }}
+{% endif %}
+{% if apt_cacher_ng_remap_debrep is defined %}
+Remap-debrep: {{ apt_cacher_ng_remap_debrep }}  # Debian Archives
+{% endif %}
+{% if apt_cacher_ng_remap_uburep is defined %}
+Remap-uburep: {{ apt_cacher_ng_remap_uburep }}  # Ubuntu Archives
+{% endif %}
+{% if apt_cacher_ng_remap_alxrep is defined %}
+Remap-alxrep: {{ apt_cacher_ng_remap_alxrep }}  # Arch Linux
+{% endif %}
+{% if apt_cacher_ng_remap_fedora is defined %}
+Remap-fedora: {{ apt_cacher_ng_remap_fedora }}  # Fedora Linux
+{% endif %}
+{% if apt_cacher_ng_remap_epel is defined %}
+Remap-epel:   {{ apt_cacher_ng_remap_epel }}    # Fedora EPEL
+{% endif %}
+{% if apt_cacher_ng_remap_slrep is defined %}
+Remap-slrep:  {{ apt_cacher_ng_remap_slrep }}   # Scientific Linux
+{% endif %}
+{% if apt_cacher_ng_remap_gentoo is defined %}
+Remap-gentoo: {{ apt_cacher_ng_remap_gentoo }}  # Gentoo Archives
 {% endif %}
