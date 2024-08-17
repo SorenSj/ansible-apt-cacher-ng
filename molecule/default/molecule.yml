@@ -1,0 +1,12 @@
+---
+driver:
+  name: docker
+platforms:
+  - name: ansible-role-apt-cacher-ng-2204
+    image: ubuntu:22.04
+
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+    enabled: false

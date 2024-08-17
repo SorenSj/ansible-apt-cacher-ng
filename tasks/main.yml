@@ -1,2 +1,16 @@
 ---
 # tasks file for sorensj.apt-cacher-ng
+- name: Include install
+  ansible.builtin.include_task: install.yml
+  tags: install
+  when: apt_cacher_ng_server is not defined
+
+- name: Include configurations
+  ansible.builtin.include_task: configure.yml
+  tags: configure
+  when: apt_cacher_ng_server is not defined
+
+- name: Include client tasks
+  ansible.builtin.include_task: client.yml
+  tags: client
+  when: apt_cacher_ng_server is defined

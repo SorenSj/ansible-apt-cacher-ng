@@ -1,0 +1,18 @@
+---
+- name: Ensure default configuration
+  template:
+    src: acng.conf.j2
+    dest: /etc/apt-cacher-ng/acng.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apt-cacher-ng
+
+- name: Security configuration
+  template:
+    src: security.conf.j2
+    dest: /etc/apt-cacher-ng/security.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apt-cacher-ng

@@ -1,0 +1,5 @@
+# {{ ansible_managed }}
+
+{% if apt_cacher_ng_security_user and apt_cacher_ng_security_password %}
+AdminAuth: {{ apt_cacher_ng_security_user }}:{{ apt_cacher_ng_security_password }}
+{% endif %}
