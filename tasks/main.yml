@@ -1,5 +1,8 @@
 ---
 # tasks file for sorensj.apt-cacher-ng
+- name: Setting variables for OS
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
 - name: Include install
   ansible.builtin.include_task: install.yml
   tags: install
