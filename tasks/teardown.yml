@@ -1,0 +1,28 @@
+---
+# Teardown tasks for apt-cacher-ng and uninstalling the package
+- name: Stop apt-cacher-ng service
+  ansible.builtin.service:
+    name: apt-cacher-ng
+    state: stopped
+    enabled: no
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Uninstall apt-cacher-ng
+  ansible.builtin.apt:
+    name: apt-cacher-ng
+    state: absent
+    purge: true
+  become: true
+  when: ansible_distribution == 'Ubuntu'
+  register: apt_cacher_ng_uninstalled
+
+- name: Remove apt-cacher-ng configuration
+  ansible.builtin.file:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/apt-cacher-ng
+    - /etc/default/apt-cacher-ng
+    - /etc/init.d/apt-cacher-ng
+  when: apt_cacher_ng_uninstalled.changed
