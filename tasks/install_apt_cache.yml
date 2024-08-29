@@ -1,15 +1,17 @@
 ---
-- name: Update sources
+- name: Update sources cache on Debian systems
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: 86400
     changed_when: false
+  when: ansible_os_family == "Debian"
 
-- name: Install apt-cacher-ng
+- name: Install apt-cacher-ng on Debian systems
   ansible.builtin.apt:
     name: apt-cacher-ng
     default_release: "{{ apt_cacher_ng_default_release | default(omit) }}"
     state: present
+    enable: true
   become: true
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_os_family == "Debian"
   register: apt_cacher_ng_installed
