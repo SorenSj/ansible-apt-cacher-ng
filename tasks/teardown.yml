@@ -6,7 +6,7 @@
     state: stopped
     enabled: no
   become: true
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_family == 'Debian'
 
 - name: Uninstall apt-cacher-ng
   ansible.builtin.apt:
@@ -14,7 +14,7 @@
     state: absent
     purge: true
   become: true
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_family == 'Debian'
   register: apt_cacher_ng_uninstalled
 
 - name: Remove apt-cacher-ng configuration
@@ -26,3 +26,13 @@
     - /etc/default/apt-cacher-ng
     - /etc/init.d/apt-cacher-ng
   when: apt_cacher_ng_uninstalled.changed
+
+- name: Remove apt-cacher-ng log and cache directories
+  ansible.builtin.file:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ apt_cacher_ng_cache_dir }}"
+    - "{{ apt_cacher_ng_log_dir }}"
+  when: apt_cacher_ng_uninstalled.changed
+  
