@@ -1,0 +1,107 @@
+---
+# Validate variables
+
+- name: "Check if apt_cacher_ng_bind_address is defined"
+  fail:
+    msg: "apt_cacher_ng_bind_address is not defined"
+  when: apt_cacher_ng_bind_address is not defined
+
+- name: "Check if {{ apt_cacher_ng_bind_address }} is a valid IP address"
+  fail:
+    msg: "{{ apt_cacher_ng_bind_address }} is not a valid IP address"
+  when: apt_cacher_ng_bind_address | ipaddr('ipv4') == false
+
+- name: "Check if apt_cacher_ng_port is defined"
+  fail:
+    msg: "apt_cacher_ng_port is not defined"
+  when: apt_cacher_ng_port is not defined
+
+- name: "Check if {{ apt_cacher_ng_port }} is a valid port number"
+  fail:
+    msg: "{{ apt_cacher_ng_port }} is not a valid port number"
+  when: apt_cacher_ng_port | int < 1 or apt_cacher_ng_port | int > 65535
+
+- name: "Check if apt_cacher_ng_report_page is defined"
+  fail:
+    msg: "apt_cacher_ng_report_page is not defined"
+  when: apt_cacher_ng_report_page is not defined
+
+- name: "Check if apt_cacher_ng_cache_dir is defined"
+  fail:
+    msg: "apt_cacher_ng_cache_dir is not defined"
+  when: apt_cacher_ng_cache_dir is not defined
+
+- name: "Check if apt_cacher_ng_log_dir is defined"
+  fail:
+    msg: "apt_cacher_ng_log_dir is not defined"
+  when: apt_cacher_ng_log_dir is not defined
+
+- name: "Check if apt_cacher_ng_verbose_log is defined"
+  fail:
+    msg: "apt_cacher_ng_verbose_log is not defined"
+  when: apt_cacher_ng_verbose_log is not defined
+
+- name: "Check if apt_cacher_ng_local_dirs is defined"
+  fail:
+    msg: "apt_cacher_ng_local_dirs is not defined"
+  when: apt_cacher_ng_local_dirs is not defined
+
+- name: "Check if apt_cacher_ng_support_dir is defined"
+  fail:
+    msg: "apt_cacher_ng_support_dir is not defined"
+  when: apt_cacher_ng_support_dir is not defined
+
+- name: "Check if apt_cacher_ng_pid_file is defined"
+  fail:
+    msg: "apt_cacher_ng_pid_file is not defined"
+  when: apt_cacher_ng_pid_file is not defined
+
+- name: "Check if apt_cacher_ng_ex_treshold is defined"
+  fail:
+    msg: "apt_cacher_ng_ex_treshold is not defined"
+  when: apt_cacher_ng_ex_treshold is not defined
+
+- name: "Check if apt_cacher_ng_remap_debrep is defined"
+  fail:
+    msg: "apt_cacher_ng_remap_debrep is not defined"
+  when: apt_cacher_ng_remap_debrep is not defined
+
+- name: "Check if apt_cacher_ng_remap_uburep is defined"
+  fail:
+    msg: "apt_cacher_ng_remap_uburep is not defined"
+  when: apt_cacher_ng_remap_uburep is not defined
+
+- name: "Check if apt_cacher_ng_security_user is defined"
+  fail:
+    msg: "apt_cacher_ng_security_user is not defined"
+  when: apt_cacher_ng_security_user is not defined
+
+- name: "Check if apt_cacher_ng_security_password is defined"
+  fail:
+    msg: "apt_cacher_ng_security_password is not defined"
+  when: apt_cacher_ng_security_password is not defined
+
+- name: "Check if apt_cacher_ng_proxy is defined"
+  fail:
+    msg: "apt_cacher_ng_proxy is not defined"
+  when: apt_cacher_ng_proxy is not defined  
+
+- name: "Check if apt_cacher_ng_default_release is defined"
+  fail:
+    msg: "apt_cacher_ng_default_release is not defined"
+  when: apt_cacher_ng_default_release is not defined
+
+- name: "Check if {{ apt_cacher_ng_default_release }} is a valid release"
+  fail:
+    msg: "{{ apt_cacher_ng_default_release }} is not a valid release"
+  when: apt_cacher_ng_default_release not in ['jessie-backports', 'stretch-backports', 'buster-backports', 'bullseye-backports', 'bookworm-backports', 'sid']
+
+- name: "Check if apt_cacher_ng_server is defined"
+  fail:
+    msg: "apt_cacher_ng_server is not defined"
+  when: apt_cacher_ng_server is not defined 
+
+- name: "Check if {{ apt_cacher_ng_server }} is a valid IP address"
+  fail:
+    msg: "{{ apt_cacher_ng_server }} is not a valid IP address"
+  when: apt_cacher_ng_server | ipaddr('ipv4') == false
